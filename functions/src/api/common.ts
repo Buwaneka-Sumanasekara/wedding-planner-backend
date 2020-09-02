@@ -21,7 +21,9 @@ CommonRouter.get("/filters",(req:Request,res:Response)=>{
         const response_obj:ResponseAPI={
             "status":true,
             "message":"success",
-            "data":result
+            "resultCount":result.length,
+            "data":result,
+           
         }
         return res.status(200).send(response_obj); 
         

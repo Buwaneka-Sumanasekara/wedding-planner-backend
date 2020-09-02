@@ -37,7 +37,8 @@ interface ResponseAPI{
     status:boolean,
     message?:string,
     statusCode?:number,
-    data?:Array<any>|Object
+    data?:Array<any>|Object,
+    resultCount?:number
 }
 
 
