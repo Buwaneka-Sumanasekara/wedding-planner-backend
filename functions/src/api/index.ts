@@ -1,10 +1,10 @@
 import * as functions from 'firebase-functions'
 import * as express from 'express';
-//import * as bodyParser from "body-parser";
 import * as cors from "cors";
 
 
-import * as testApi from './test';
+import  GuestRouter from './guests';
+import  CommonRouter from './common';
 
 
 
@@ -12,8 +12,9 @@ import * as testApi from './test';
 
 const app = express();
 app.use(cors());
-app.get('/test', testApi.testAPIFun);
-app.post('/guests/import',testApi.importGuests);
+
+app.use('/guests',GuestRouter);
+app.use('/common',CommonRouter);
 
 
 const main = express();
