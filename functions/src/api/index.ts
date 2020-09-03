@@ -5,6 +5,7 @@ import * as cors from "cors";
 
 import  GuestRouter from './guests';
 import  CommonRouter from './common';
+import  InvitationRouter from './invitations';
 
 
 
@@ -15,6 +16,7 @@ app.use(cors());
 
 app.use('/guests',GuestRouter);
 app.use('/common',CommonRouter);
+app.use('/invitation',InvitationRouter);
 
 
 const main = express();

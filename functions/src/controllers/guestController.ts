@@ -11,6 +11,31 @@ import * as admin from 'firebase-admin';
 import { GuessFilter, GuestModel } from "../models";
 
 
+const getGuestById = async (GuestId:string) => {
+    try {
+        const ref = admin.firestore().collection("guests")
+        let query: admin.firestore.Query<admin.firestore.DocumentData> = ref;
+        query=query.where("id","==",GuestId)
+        return query.orderBy("name").limit(1).get().then(snap=>{
+            const result:Array<any>=[];
+            if(snap!==undefined && !snap.empty){
+                snap.forEach(doc => result.push(doc.data()))
+            }
+            
+            if(result.length>0){
+                return result[0]
+            }else{
+                throw new Error("Guest not found");
+            }
+        }).catch(err=>{
+            throw err;
+        })
+    } catch (error) {
+            throw error; 
+    }
+
+}
+
 const getGuests = async (filter: GuessFilter) => {
     try {
         console.log("called",filter)
@@ -103,5 +128,6 @@ const importGuests = (allguests: []) => {
 
 export default {
     importGuests,
-    getGuests
+    getGuests,
+    getGuestById
 }

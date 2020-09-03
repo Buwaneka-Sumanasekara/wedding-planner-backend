@@ -44,11 +44,42 @@ interface ResponseAPI{
     resultCount?:number
 }
 
+interface Invitation{
+    status:boolean,
+    refCode:string,
+    guestId:string,
+    eventLocation?:string,
+    eventDate?:string,
+    poruwaCeromoney?:string,
+    guest?:GuestModel,
+    qrCode?:string,
+}
+
+interface ServiceAccount{
+    type:string,
+    project_id:string,
+    private_key_id:string,
+    private_key:string,
+    client_email:string,
+    client_id:string,
+    auth_uri:string,
+    token_uri:string,
+    auth_provider_x509_cert_url:string,
+    client_x509_cert_url:string
+}
+
+interface NewInvitation{
+    guestId:string,
+}
+
 
 
 export{
     GuestModel,
     GuessFilter,
     ResponseAPI,
-    FrontdEndFilters
+    FrontdEndFilters,
+    Invitation,
+    NewInvitation,
+    ServiceAccount
 }

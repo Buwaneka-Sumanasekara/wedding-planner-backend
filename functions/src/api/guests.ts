@@ -23,7 +23,6 @@ GuestRouter.post("/",(req:Request,res:Response)=>{
                 "message":"success",
                 "resultCount":result.length,
                 "data":result
-               
             }
             return res.status(200).send(response_obj); 
         }).catch(error=>{
@@ -48,6 +47,25 @@ GuestRouter.post("/",(req:Request,res:Response)=>{
         return res.status(500).send(error.message);
     }
 })
+GuestRouter.get("/:guestId",(req:Request,res:Response)=>{
+    try {
+        const GuestId:string=req.params.guestId;
+        return GuestController.getGuestById(GuestId).then(result=>{
+            const response_obj:ResponseAPI={
+                "status":true,
+                "message":"success",
+                "data":result
+            }
+            return res.status(200).send(response_obj); 
+        }).catch(error=>{
+            return res.status(200).send(error.message); 
+        })
 
+        
+    } catch (error) {
+        return res.status(500).send(error.message);
+    }
+    
+})
 
 export default GuestRouter;

@@ -7,7 +7,7 @@
  * Modified By: Buwaneka (buwanekasumanasekara@gmail.com>)
  * --------------------------------------------------------------
  */
-import * as admin from "firebase-admin";
+
 
 const filter_invite_modes =[{"id":"MR","name":"Mr"},{"id":"MRS","name":"Mrs"},{"id":"MS","name":"Miss"},{"id":"MR & MRS","name":"Couple"},{"id":"FAMILY","name":"All Family members"}];
 
@@ -36,14 +36,15 @@ const FILTERS={
 
 }
 
-const FIREBASE_DB=()=>{
-    const db = admin.firestore();
-    db.settings({ ignoreUndefinedProperties: true });
-    return db;
+const INVITATION={
+    LOCATION:"Saminro Grand Palace",
+    DATE:"2020-10-25",
+    PORUWA_CEROMONEY:"10:00",    
 }
+
 
  export {
     FILTERS,
     FILTER_KEYS,
-    FIREBASE_DB
+    INVITATION
  }
