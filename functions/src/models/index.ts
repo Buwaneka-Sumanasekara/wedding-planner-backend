@@ -20,16 +20,19 @@ interface GuestModel{
     tag1:string,
     tag2:string,
     tag3:string,
-    tableNo:number
+    tableNo:number,
+    keywords1:Array<any>,
+    keywords2?:Array<any>
 }
 
 
 interface GuessFilter{
+    name?:String,
     side?:String,
-    inviteMode?:Array<String>,
-    tag1?:Array<String>,
-    tag2?:Array<String>,
-    tag3?:Array<String>,
+    inviteMode?:String,
+    tag1?:String,
+    tag2?:String,
+    tag3?:String,
     tableNo?:number
 }
 

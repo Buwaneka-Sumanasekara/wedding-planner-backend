@@ -7,6 +7,7 @@
  * Modified By: Buwaneka (buwanekasumanasekara@gmail.com>)
  * --------------------------------------------------------------
  */
+import * as admin from "firebase-admin";
 
 const filter_invite_modes =[{"id":"MR","name":"Mr"},{"id":"MRS","name":"Mrs"},{"id":"MS","name":"Miss"},{"id":"MR & MRS","name":"Couple"},{"id":"FAMILY","name":"All Family members"}];
 
@@ -35,7 +36,14 @@ const FILTERS={
 
 }
 
+const FIREBASE_DB=()=>{
+    const db = admin.firestore();
+    db.settings({ ignoreUndefinedProperties: true });
+    return db;
+}
+
  export {
     FILTERS,
-    FILTER_KEYS
+    FILTER_KEYS,
+    FIREBASE_DB
  }
