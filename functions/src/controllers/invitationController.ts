@@ -11,6 +11,7 @@
 import * as admin from 'firebase-admin';
 import { Invitation, NewInvitation } from "../models";
 import GuestController from "./guestController";
+import { INVITATION } from '../constants-data';
 
 
 
@@ -50,7 +51,7 @@ const getInvitationDetails = async (refCode: string) => {
             action: 'read',
             expires: '30-10-2020'
           }).then(signeUrls => {
-            invitation = { ...invitation, "qrCode": signeUrls[0],"guest":value }
+            invitation = { ...invitation, "qrCode": signeUrls[0],"guest":value,"eventLocation":INVITATION.LOCATION,"eventDate":INVITATION.DATE,"poruwaCeromoney":INVITATION.PORUWA_CEROMONEY }
             return invitation;
           }).catch(err => {
             throw err;
