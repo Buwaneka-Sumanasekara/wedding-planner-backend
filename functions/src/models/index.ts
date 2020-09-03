@@ -53,6 +53,7 @@ interface Invitation{
     poruwaCeromoney?:string,
     guest?:GuestModel,
     qrCode?:string,
+    scanned:boolean
 }
 
 interface ServiceAccount{

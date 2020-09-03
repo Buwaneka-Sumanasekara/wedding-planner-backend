@@ -11,7 +11,7 @@
 import * as admin from 'firebase-admin';
 import { Invitation, NewInvitation } from "../models";
 import GuestController from "./guestController";
-import {INVITATION} from "../constants-data";
+
 
 
 const createInvitationLink = async (newinvitation: NewInvitation) => {
@@ -20,7 +20,8 @@ const createInvitationLink = async (newinvitation: NewInvitation) => {
     const invitation: Invitation = {
       "status": true,
       "refCode": Buffer.from(`${newinvitation.guestId}`).toString('base64'),
-      "guestId": `${newinvitation.guestId}`
+      "guestId": `${newinvitation.guestId}`,
+      "scanned":false
     }
     await admin.firestore().collection("invitations").doc(invitation.refCode).set(invitation);
     return invitation;
@@ -44,10 +45,6 @@ const getInvitationDetails = async (refCode: string) => {
         snap_invitation.forEach(doc => invitations.push(doc.data()));
         let invitation: Invitation = invitations[0];
         return GuestController.getGuestById(invitation.guestId).then(value => {
-
-
-         // invitation = { ...invitation,"guest":value,"eventLocation":INVITATION.LOCATION,"eventDate":INVITATION.DATE,"poruwaCeromoney":INVITATION.PORUWA_CEROMONEY }
-          //return invitation;
 
           return admin.storage().bucket("wedding-planer-517fe.appspot.com").file("qr-code.svg").getSignedUrl({
             action: 'read',
