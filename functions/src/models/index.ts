@@ -22,7 +22,8 @@ interface GuestModel{
     tag3:string,
     tableNo:number,
     keywords1:Array<any>,
-    keywords2?:Array<any>
+    keywords2?:Array<any>,
+    refCode?:string,
 }
 
 

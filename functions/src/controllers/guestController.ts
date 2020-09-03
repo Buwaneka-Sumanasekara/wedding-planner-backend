@@ -110,6 +110,7 @@ const importGuests = (allguests: []) => {
                     "tag2": docval["Tag2"],
                     "tag3": docval["Tag3"],
                     "keywords1":createKeyWords(docval["NameOnCard"]),
+                    "refCode":""
                 }
 
                 await admin.firestore().collection("guests").doc(guest.id).set(guest);

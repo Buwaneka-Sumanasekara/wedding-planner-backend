@@ -1,6 +1,7 @@
 import * as admin from 'firebase-admin';
 
 import * as api from './api';
+import * as triggers from './triggers';
 
 
 const serviceaccount:admin.ServiceAccount={
@@ -28,3 +29,6 @@ admin.initializeApp({
 
 //API
 exports.webApi = api.webApi;
+exports.onCreateInvitation = triggers.onCreate_Invitation;
+exports.onUpdateInvitation = triggers.onUpdate_Invitation;
+exports.onDeleteInvitation = triggers.onDelete_Invitation;
