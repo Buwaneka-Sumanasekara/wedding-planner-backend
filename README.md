@@ -50,6 +50,7 @@ $ cd npm run-script build
 $ cd [PrjFolder]/firebase-tools
 $ firebase use prod
 $ firebase deploy --except functions
+$ firebase deploy --only hosting
 ```
 
 
