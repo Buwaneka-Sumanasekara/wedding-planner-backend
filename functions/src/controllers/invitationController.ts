@@ -34,7 +34,7 @@ const createInvitationLink = async (newinvitation: NewInvitation) => {
 const getInvitationDetails = async (refCode: string) => {
   try {
     
-
+const expired_date=((process.env.FUNCTIONS_EMULATOR && process.env.FIRESTORE_EMULATOR_HOST)?'30-10-2020':'2020-10-30');
     const ref = admin.firestore().collection("invitations")
     let query: admin.firestore.Query<admin.firestore.DocumentData> = ref;
     query = query.where("refCode", "==", refCode)
@@ -49,7 +49,8 @@ const getInvitationDetails = async (refCode: string) => {
 
           return admin.storage().bucket("wedding-planer-517fe.appspot.com").file("qr-code.svg").getSignedUrl({
             action: 'read',
-            expires: '30-10-2020'
+            //expires: '30-10-2020'
+            expires:expired_date 
           }).then(signeUrls => {
             invitation = { ...invitation, "qrCode": signeUrls[0],"guest":value,"eventLocation":INVITATION.LOCATION,"eventDate":INVITATION.DATE,"poruwaCeromoney":INVITATION.PORUWA_CEROMONEY }
             return invitation;
