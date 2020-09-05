@@ -41,7 +41,7 @@ const expired_date=((process.env.FUNCTIONS_EMULATOR && process.env.FIRESTORE_EMU
     query = query.where("refCode", "==", refCode)
     return query.limit(1).get().then(snap_invitation => {
       if (snap_invitation.empty) {
-        throw new Error("Your not invited")
+        throw new Error("You are not invited")
       } else {
         const invitations: Array<any> = [];
         snap_invitation.forEach(doc => invitations.push(doc.data()));
