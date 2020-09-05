@@ -46,7 +46,7 @@ interface ResponseAPI{
 }
 
 interface Invitation{
-    status:boolean,
+    status?:boolean,
     refCode:string,
     guestId:string,
     eventLocation?:string,
@@ -54,7 +54,8 @@ interface Invitation{
     poruwaCeromoney?:string,
     guest?:GuestModel,
     qrCode?:string,
-    scanned:boolean
+    scanned?:boolean,
+    accepted:boolean
 }
 
 interface ServiceAccount{

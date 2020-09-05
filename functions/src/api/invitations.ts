@@ -10,12 +10,12 @@
 
 import { Router,Response,Request } from "express";
 import InvitationController from "../controllers/invitationController";
-import {ResponseAPI,NewInvitation} from "../models";
+import {ResponseAPI,NewInvitation,Invitation} from "../models";
 
 
 
 const InvitationRouter = Router();
-InvitationRouter.post("/",(req:Request,res:Response)=>{
+InvitationRouter.route("/").post((req:Request,res:Response)=>{
     try {
         
         const new_invitation:NewInvitation=req.body;
@@ -39,7 +39,8 @@ InvitationRouter.post("/",(req:Request,res:Response)=>{
     }
 })
 
-InvitationRouter.get("/:InvId",(req:Request,res:Response)=>{
+InvitationRouter.route("/:InvId")
+.get((req:Request,res:Response)=>{
     try {
         const InvId:string=req.params.InvId;
         return InvitationController.getInvitationDetails(InvId).then(result=>{
@@ -50,7 +51,25 @@ InvitationRouter.get("/:InvId",(req:Request,res:Response)=>{
             }
             return res.status(200).send(response_obj); 
         }).catch(error=>{
-            return res.status(200).send(error.message); 
+            return res.status(500).send(error.message); 
+        })
+    } catch (error) {
+        return res.status(500).send(error.message); 
+    }
+}).post((req:Request,res:Response)=>{
+    try {
+        const InvId:string=req.params.InvId;
+        const invitation:Invitation=req.body;
+        invitation.refCode=InvId;
+        return InvitationController.acceptedDeclineInvitation(invitation).then(result=>{
+            const response_obj:ResponseAPI={
+                "status":true,
+                "message":"success",
+                "data":result
+            }
+            return res.status(200).send(response_obj); 
+        }).catch(error=>{
+            return res.status(500).send(error.message); 
         })
     } catch (error) {
         return res.status(500).send(error.message); 

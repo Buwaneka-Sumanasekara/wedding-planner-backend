@@ -93,9 +93,6 @@ const importGuests = (allguests: []) => {
         allguests.forEach(async (docval: any, i: number) => {
             if (docval !== "") {
                 const id = (i + 1);
-
-                
-
                 const guest: GuestModel = {
                     "id": `${docval["Side"]}${id}`,
                     "name": docval["NameOnCard"],

@@ -22,7 +22,8 @@ const createInvitationLink = async (newinvitation: NewInvitation) => {
       "status": true,
       "refCode": Buffer.from(`${newinvitation.guestId}`).toString('base64'),
       "guestId": `${newinvitation.guestId}`,
-      "scanned":false
+      "scanned":false,
+      "accepted":false
     }
     await admin.firestore().collection("invitations").doc(invitation.refCode).set(invitation);
     return invitation;
@@ -69,7 +70,18 @@ const expired_date=((process.env.FUNCTIONS_EMULATOR && process.env.FIRESTORE_EMU
   }
 }
 
+const acceptedDeclineInvitation = async (invitation:Invitation) => {
+  try {
+    await admin.firestore().collection("invitations").doc(invitation.refCode).update({"accepted":invitation.accepted})
+    return invitation;
+  } catch (error) {
+    throw error;
+  }
+}
+
+
 export default {
   createInvitationLink,
-  getInvitationDetails
+  getInvitationDetails,
+  acceptedDeclineInvitation
 }

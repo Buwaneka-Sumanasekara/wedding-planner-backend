@@ -26,7 +26,7 @@ GuestRouter.post("/",(req:Request,res:Response)=>{
             }
             return res.status(200).send(response_obj); 
         }).catch(error=>{
-            return res.status(200).send(error.message); 
+            return res.status(500).send(error.message); 
         })
 
         
@@ -58,7 +58,7 @@ GuestRouter.get("/:guestId",(req:Request,res:Response)=>{
             }
             return res.status(200).send(response_obj); 
         }).catch(error=>{
-            return res.status(200).send(error.message); 
+            return res.status(500).send(error.message); 
         })
 
         
