@@ -60,6 +60,7 @@ InvitationRouter.route("/:InvId")
         const InvId:string=req.params.InvId;
         const invitation:Invitation=req.body;
         invitation.refCode=InvId;
+        invitation.scanned=true;
         return InvitationController.acceptedDeclineInvitation(invitation).then(result=>{
             const response_obj:ResponseAPI={
                 "status":true,
