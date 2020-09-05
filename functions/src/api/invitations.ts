@@ -7,7 +7,6 @@
  * Modified By: Buwaneka (buwanekasumanasekara@gmail.com>)
  * --------------------------------------------------------------
  */
-
 import { Router,Response,Request } from "express";
 import InvitationController from "../controllers/invitationController";
 import {ResponseAPI,NewInvitation,Invitation} from "../models";
@@ -56,7 +55,7 @@ InvitationRouter.route("/:InvId")
     } catch (error) {
         return res.status(500).send(error.message); 
     }
-}).post((req:Request,res:Response)=>{
+}).put((req:Request,res:Response)=>{
     try {
         const InvId:string=req.params.InvId;
         const invitation:Invitation=req.body;
