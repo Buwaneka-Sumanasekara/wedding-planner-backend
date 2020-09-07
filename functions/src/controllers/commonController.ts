@@ -25,7 +25,8 @@ const getAllFilters = () => {
             "descriptions": "Filter by Side",
             "isrequired": true,
             "multiSelect": false,
-            "values": FILTERS.SIDE
+            "values": FILTERS.SIDE,
+            "depend_on":""
         }
         result.push(filterObj_side);
         const filterObj_invite_mode: FrontdEndFilters = {
@@ -34,7 +35,8 @@ const getAllFilters = () => {
             "descriptions": "Filter by Invite Mode",
             "isrequired": true,
             "multiSelect": false,
-            "values": FILTERS.INVITE_MODE
+            "values": FILTERS.INVITE_MODE,
+            "depend_on":""
         }
         result.push(filterObj_invite_mode);
 
@@ -44,7 +46,8 @@ const getAllFilters = () => {
             "descriptions": "Filter by Tag1",
             "isrequired": true,
             "multiSelect": false,
-            "values": FILTERS.TAG1
+            "values": FILTERS.TAG1,
+            "depend_on":""
         }
         result.push(filterObj_tag1);
 
@@ -54,7 +57,8 @@ const getAllFilters = () => {
             "descriptions": "Filter by Tag2",
             "isrequired": true,
             "multiSelect": false,
-            "values": FILTERS.TAG2
+            "values": FILTERS.TAG2,
+            "depend_on":FILTER_KEYS.TAG1,
         }
         result.push(filterObj_tag2);
 
@@ -64,7 +68,8 @@ const getAllFilters = () => {
             "descriptions": "Filter by Tag3",
             "isrequired": true,
             "multiSelect": false,
-            "values": FILTERS.TAG3
+            "values": FILTERS.TAG3,
+            "depend_on":FILTER_KEYS.SIDE
         }
         result.push(filterObj_tag3);
 

@@ -5,7 +5,8 @@ interface FrontdEndFilters{
     descriptions:string,
     values:Array<Object>,
     isrequired:boolean,
-    multiSelect:boolean
+    multiSelect:boolean,
+    depend_on:string
 }
 
 interface GuestModel{
