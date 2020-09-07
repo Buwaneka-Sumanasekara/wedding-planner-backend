@@ -11,7 +11,7 @@
 
 const filter_invite_modes =[{"id":"MR","name":"Mr"},{"id":"MRS","name":"Mrs"},{"id":"MS","name":"Miss"},{"id":"MR & MRS","name":"Couple"},{"id":"FAMILY","name":"All Family members"}];
 
-const filter_Side = [{"id":"B","name":"Groom"},{"id":"S","name":"Bride"},{"id":"COMMON","name":"Both Sides"}];
+const filter_Side = [{"id":"B","name":"Groom"},{"id":"S","name":"Bride"}];
 
 const filter_tag1 = [{"id":"FAMILY","name":"Close members"},{"id":"FRIEND","name":"Friend"},{"id":"OFFICE","name":"Office"},{"id":"COUSIN","name":"Cousins"},{"id":"NEIGHBOURS","name":"Neighbours"}];
 
