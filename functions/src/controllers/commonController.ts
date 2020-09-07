@@ -25,7 +25,7 @@ const getAllFilters = () => {
             "descriptions": "Filter by Side",
             "isrequired": true,
             "multiSelect": false,
-            "values": _.sortBy(FILTERS.SIDE,(o:any)=>o.id),
+            "values": _.sortBy(FILTERS.SIDE,(o:any)=>{return o.name}),
             "depend_on":""
         }
         result.push(filterObj_side);
@@ -36,7 +36,7 @@ const getAllFilters = () => {
             "isrequired": true,
             "multiSelect": false,
             //"values": FILTERS.INVITE_MODE,
-            "values":_.sortBy(FILTERS.INVITE_MODE,(o:any)=>o.id),
+            "values":_.sortBy(FILTERS.INVITE_MODE,(o:any)=>{return o.id}),
             "depend_on":""
         }
         result.push(filterObj_invite_mode);
@@ -48,7 +48,7 @@ const getAllFilters = () => {
             "isrequired": true,
             "multiSelect": false,
            // "values": FILTERS.TAG1,
-           "values":_.sortBy(FILTERS.TAG1,(o:any)=>o.id),
+           "values":_.sortBy(FILTERS.TAG1,(o:any)=> {return o.name}),
             "depend_on":""
         }
         result.push(filterObj_tag1);
@@ -60,7 +60,7 @@ const getAllFilters = () => {
             "isrequired": true,
             "multiSelect": false,
             //"values": FILTERS.TAG2,
-            "values":_.sortBy(FILTERS.TAG2,(o:any)=>o.id),
+            "values":_.sortBy(FILTERS.TAG2,(o:any)=>{return o.name}),
             "depend_on":FILTER_KEYS.TAG1,
         }
         result.push(filterObj_tag2);
@@ -72,7 +72,7 @@ const getAllFilters = () => {
             "isrequired": true,
             "multiSelect": false,
            // "values": FILTERS.TAG3,
-            "values":_.sortBy(FILTERS.TAG3,(o:any)=>o.id),
+            "values":_.sortBy(FILTERS.TAG3,(o:any)=>{return o.name}),
             "depend_on":FILTER_KEYS.SIDE
         }
         result.push(filterObj_tag3);
