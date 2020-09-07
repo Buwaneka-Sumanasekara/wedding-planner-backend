@@ -10,7 +10,7 @@
 
 import { FrontdEndFilters } from "../models";
 import {FILTER_KEYS,FILTERS} from "../constants-data";
-import _ from "lodash";
+import * as _ from "lodash";
 
 const getAllFilters = () => {
     try {
