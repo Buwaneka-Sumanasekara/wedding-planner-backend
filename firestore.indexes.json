@@ -1,4 +1,34 @@
 {
-  "indexes": [],
+  "indexes": [
+    { 
+      "collectionGroup": "guests",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "id", "order": "ASCENDING" },
+        { "fieldPath": "name", "order": "ASCENDING" },
+        { "fieldPath": "inviteMode", "order": "ASCENDING" },
+        { "fieldPath": "tag1", "order": "ASCENDING" },
+        { "fieldPath": "tag2", "order": "ASCENDING" },
+        { "fieldPath": "tag3", "order": "ASCENDING" },
+        { "fieldPath": "side", "order": "ASCENDING" },
+        { "fieldPath": "keywords1", "order": "ASCENDING" }
+      ]
+    },
+    { 
+      "collectionGroup": "guests",
+      "queryScope": "COLLECTION_GROUP",
+      "fields": [
+        { "fieldPath": "id", "order": "ASCENDING" },
+        { "fieldPath": "name", "order": "ASCENDING" },
+        { "fieldPath": "inviteMode", "order": "ASCENDING" },
+        { "fieldPath": "tag1", "order": "ASCENDING" },
+        { "fieldPath": "tag2", "order": "ASCENDING" },
+        { "fieldPath": "tag3", "order": "ASCENDING" },
+        { "fieldPath": "side", "order": "ASCENDING" },
+        { "fieldPath": "keywords1", "order": "ASCENDING" }
+      ]
+    }
+
+  ],
   "fieldOverrides": []
 }
