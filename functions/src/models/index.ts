@@ -35,7 +35,8 @@ interface GuessFilter{
     tag1?:String,
     tag2?:String,
     tag3?:String,
-    tableNo?:number
+    tableNo?:number,
+    limit?:number
 }
 
 interface ResponseAPI{

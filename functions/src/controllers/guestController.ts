@@ -57,8 +57,13 @@ const getGuests = async (filter: GuessFilter) => {
             console.log("name",filter.name)
             query = query.where('keywords1',"array-contains",filter.name.toLowerCase())
         }
-        
-        return query.orderBy("name").limit(10).get().then(snap=>{
+        query=query.orderBy("name")
+
+        if(filter.limit !==undefined){
+            query=query.limit(filter.limit)
+        }
+
+        return query.get().then(snap=>{
             const result:Array<any>=[];
             if(snap!==undefined && !snap.empty){
                 snap.forEach(doc => result.push(doc.data()))
