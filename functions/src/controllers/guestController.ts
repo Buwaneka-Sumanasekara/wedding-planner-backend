@@ -119,8 +119,11 @@ const importGuests = (allguests: []) => {
                     "linkGenerated":false
                 }
 
-                await admin.firestore().collection("guests").doc(guest.id).set(guest);
-
+                return admin.firestore().collection("guests").doc(guest.id).set(guest).then(v=>{
+                    return true;
+                }).catch(e=>{
+                    throw e;
+                });
             }
             return docval;
         });
