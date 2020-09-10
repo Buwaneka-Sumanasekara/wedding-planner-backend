@@ -115,7 +115,8 @@ const importGuests = (allguests: []) => {
                     "tag2": docval["Tag2"],
                     "tag3": docval["Tag3"],
                     "keywords1":createKeyWords(docval["NameOnCard"]),
-                    "refCode":Buffer.from(`${guestId}`).toString('base64')
+                    "refCode":Buffer.from(`${guestId}`).toString('base64'),
+                    "linkGenerated":false
                 }
 
                 await admin.firestore().collection("guests").doc(guest.id).set(guest);

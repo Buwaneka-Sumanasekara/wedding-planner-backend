@@ -25,6 +25,7 @@ interface GuestModel{
     keywords1:Array<any>,
     keywords2?:Array<any>,
     refCode?:string,
+    linkGenerated:boolean
 }
 
 
@@ -57,7 +58,8 @@ interface Invitation{
     guest?:GuestModel,
     qrCode?:string,
     scanned?:boolean,
-    accepted:boolean
+    accepted:boolean,
+    log:Array<any>
 }
 
 interface ServiceAccount{

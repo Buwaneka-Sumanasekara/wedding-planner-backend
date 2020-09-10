@@ -23,7 +23,8 @@ const createInvitationLink = async (newinvitation: NewInvitation) => {
       "refCode": Buffer.from(`${newinvitation.guestId}`).toString('base64'),
       "guestId": `${newinvitation.guestId}`,
       "scanned": false,
-      "accepted": false
+      "accepted": false,
+      "log":[]
     }
     await admin.firestore().collection("invitations").doc(invitation.refCode).set(invitation);
     return invitation;
@@ -49,8 +50,13 @@ const getInvitationDetails = async (refCode: string) => {
         let invitation: Invitation = invitations[0];
         return GuestController.getGuestById(invitation.guestId).then(value => {
 
-          invitation = { ...invitation, "qrCode": "", "guest": value, "eventLocation": INVITATION.LOCATION, "eventDate": INVITATION.DATE, "poruwaCeromoney": INVITATION.PORUWA_CEROMONEY }
-          return invitation;
+          if(value.linkGenerated){
+            invitation = { ...invitation, "qrCode": "", "guest": value, "eventLocation": INVITATION.LOCATION, "eventDate": INVITATION.DATE, "poruwaCeromoney": INVITATION.PORUWA_CEROMONEY }
+            return invitation;
+          }else{
+            throw new Error("your link has been disabled");
+          }
+         
 
           // return admin.storage().bucket("wedding-planer-517fe.appspot.com").file("qr-code.svg").getSignedUrl({
           //   action: 'read',
@@ -76,8 +82,21 @@ const getInvitationDetails = async (refCode: string) => {
 
 const acceptedDeclineInvitation = async (invitation: Invitation) => {
   try {
-    await admin.firestore().collection("invitations").doc(invitation.refCode).update({ "accepted": invitation.accepted })
-    return invitation;
+
+    await admin.firestore().collection("invitations").doc(invitation.refCode).update({ "accepted": invitation.accepted})
+    const timestamp = admin.firestore.FieldValue.serverTimestamp();
+    const ref=admin.firestore().collection("invitations").doc(`${invitation.refCode}`);
+    return admin.firestore().runTransaction(transaction => {
+      return transaction.get(ref).then(snapshot => {
+        const largerArray = snapshot.get('log');
+        largerArray.push({"isAccepted":invitation.accepted,"crdate":timestamp});
+        transaction.update(ref, 'log', largerArray);
+      }).finally(()=>{
+        return invitation;
+      });
+    });
+     
+ 
   } catch (error) {
     throw error;
   }
