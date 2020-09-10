@@ -9,14 +9,14 @@
  */
 import { Router,Response,Request } from "express";
 import GuestController from "../controllers/guestController";
-import {GuessFilter,ResponseAPI} from "../models";
+import {GuestFilter,ResponseAPI,GuestUpdate} from "../models";
 
 
 const GuestRouter = Router();
 
 GuestRouter.post("/",(req:Request,res:Response)=>{
     try {
-        const filter:GuessFilter=req.body;
+        const filter:GuestFilter=req.body;
         return GuestController.getGuests(filter).then(result=>{
             const response_obj:ResponseAPI={
                 "status":true,
@@ -32,8 +32,25 @@ GuestRouter.post("/",(req:Request,res:Response)=>{
         
     } catch (error) {
         return res.status(500).send(error.message);
-    }
-    
+    } 
+}).put("/",(req:Request,res:Response)=>{
+    try {
+        const guest:GuestUpdate=req.body;
+        return GuestController.updateGuest(guest).then(result=>{
+            const response_obj:ResponseAPI={
+                "status":true,
+                "message":"success",
+                "data":guest
+            }
+            return res.status(200).send(response_obj); 
+        }).catch(error=>{
+            return res.status(500).send(error.message); 
+        })
+
+        
+    } catch (error) {
+        return res.status(500).send(error.message);
+    } 
 })
 .post("/import",(req:Request,res:Response)=>{
     try {

@@ -8,7 +8,7 @@
  * --------------------------------------------------------------
  */
 import * as admin from 'firebase-admin';
-import { GuessFilter, GuestModel } from "../models";
+import { GuestFilter, GuestModel,GuestUpdate} from "../models";
 
 
 const getGuestById = async (GuestId: string) => {
@@ -33,10 +33,11 @@ const getGuestById = async (GuestId: string) => {
     } catch (error) {
         throw error;
     }
-
 }
 
-const getGuests = async (filter: GuessFilter) => {
+
+
+const getGuests = async (filter: GuestFilter) => {
     try {
         console.log("called", filter)
         const ref = admin.firestore().collection("guests")
@@ -121,7 +122,8 @@ const importGuests = async(allguests: []) => {
                     "tag3": docval["Tag3"],
                     "keywords1": createKeyWords(docval["NameOnCard"]),
                     "refCode": Buffer.from(`${guestId}`).toString('base64'),
-                    "linkGenerated":false
+                    "linkGenerated":false,
+                    "attendedCount":0
                 }
                 const guestRef=admin.firestore().collection("guests").doc(guestId);
                 await guestRef.set(guest);
@@ -136,11 +138,19 @@ const importGuests = async(allguests: []) => {
     }
 };
 
-
+const updateGuest = async (guest:GuestUpdate) => {
+    try {
+        const guestRef=admin.firestore().collection("guests").doc(guest.id);
+        await guestRef.update(guest);
+    } catch (error) {
+        throw error;
+    }
+}
 
 
 export default {
     importGuests,
     getGuests,
-    getGuestById
+    getGuestById,
+    updateGuest
 }

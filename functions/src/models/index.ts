@@ -25,11 +25,23 @@ interface GuestModel{
     keywords1:Array<any>,
     keywords2?:Array<any>,
     refCode?:string,
-    linkGenerated:boolean
+    linkGenerated:boolean,
+    attendedCount:number
 }
 
+interface GuestUpdate{
+    id:string,
+    name?:string
+    nickName?:string,
+    inviteMode?:string,
+    side?:string,
+    seats?:number,
+    contact1?:string,
+    constact2?:string,
+    tableNo?:number,
+}
 
-interface GuessFilter{
+interface GuestFilter{
     name?:String,
     side?:String,
     inviteMode?:String,
@@ -83,7 +95,8 @@ interface NewInvitation{
 
 export{
     GuestModel,
-    GuessFilter,
+    GuestFilter,
+    GuestUpdate,
     ResponseAPI,
     FrontdEndFilters,
     Invitation,
