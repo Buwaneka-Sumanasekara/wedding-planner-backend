@@ -22,8 +22,8 @@ const createInvitationLink = async (newinvitation: NewInvitation) => {
       "status": true,
       "refCode": Buffer.from(`${newinvitation.guestId}`).toString('base64'),
       "guestId": `${newinvitation.guestId}`,
-      "scanned":false,
-      "accepted":false
+      "scanned": false,
+      "accepted": false
     }
     await admin.firestore().collection("invitations").doc(invitation.refCode).set(invitation);
     return invitation;
@@ -34,8 +34,9 @@ const createInvitationLink = async (newinvitation: NewInvitation) => {
 
 const getInvitationDetails = async (refCode: string) => {
   try {
-    
-const expired_date=((process.env.FUNCTIONS_EMULATOR && process.env.FIRESTORE_EMULATOR_HOST)?'30-10-2020':'2020-10-30');
+
+    //const expired_date=((process.env.FUNCTIONS_EMULATOR && process.env.FIRESTORE_EMULATOR_HOST)?'30-10-2020':'2020-10-30');
+
     const ref = admin.firestore().collection("invitations")
     let query: admin.firestore.Query<admin.firestore.DocumentData> = ref;
     query = query.where("refCode", "==", refCode)
@@ -48,16 +49,19 @@ const expired_date=((process.env.FUNCTIONS_EMULATOR && process.env.FIRESTORE_EMU
         let invitation: Invitation = invitations[0];
         return GuestController.getGuestById(invitation.guestId).then(value => {
 
-          return admin.storage().bucket("wedding-planer-517fe.appspot.com").file("qr-code.svg").getSignedUrl({
-            action: 'read',
-            //expires: '30-10-2020'
-            expires:expired_date 
-          }).then(signeUrls => {
-            invitation = { ...invitation, "qrCode": signeUrls[0],"guest":value,"eventLocation":INVITATION.LOCATION,"eventDate":INVITATION.DATE,"poruwaCeromoney":INVITATION.PORUWA_CEROMONEY }
-            return invitation;
-          }).catch(err => {
-            throw err;
-          })
+          invitation = { ...invitation, "qrCode": "", "guest": value, "eventLocation": INVITATION.LOCATION, "eventDate": INVITATION.DATE, "poruwaCeromoney": INVITATION.PORUWA_CEROMONEY }
+          return invitation;
+
+          // return admin.storage().bucket("wedding-planer-517fe.appspot.com").file("qr-code.svg").getSignedUrl({
+          //   action: 'read',
+          //   //expires: '30-10-2020'
+          //   expires:expired_date 
+          // }).then(signeUrls => {
+
+
+          // }).catch(err => {
+          //   throw err;
+          // })
         }).catch(error => {
           throw error;
         })
@@ -70,9 +74,9 @@ const expired_date=((process.env.FUNCTIONS_EMULATOR && process.env.FIRESTORE_EMU
   }
 }
 
-const acceptedDeclineInvitation = async (invitation:Invitation) => {
+const acceptedDeclineInvitation = async (invitation: Invitation) => {
   try {
-    await admin.firestore().collection("invitations").doc(invitation.refCode).update({"accepted":invitation.accepted})
+    await admin.firestore().collection("invitations").doc(invitation.refCode).update({ "accepted": invitation.accepted })
     return invitation;
   } catch (error) {
     throw error;

@@ -56,6 +56,8 @@ const getGuests = async (filter: GuessFilter) => {
         }if (filter.name !== undefined && filter.name!=="") {
             console.log("name",filter.name)
             query = query.where('keywords1',"array-contains",filter.name.toLowerCase())
+        }if (filter.tableNo !== undefined && filter.tableNo>0) {
+            query = query.where('tableNo',"==",filter.tableNo)
         }
         query=query.orderBy("name")
 
@@ -98,8 +100,9 @@ const importGuests = (allguests: []) => {
         allguests.forEach(async (docval: any, i: number) => {
             if (docval !== "") {
                 const id = (i + 1);
+                const guestId=`${docval["Side"]}${id}`;
                 const guest: GuestModel = {
-                    "id": `${docval["Side"]}${id}`,
+                    "id": guestId,
                     "name": docval["NameOnCard"],
                     "nickName": docval["RefName"],
                     "inviteMode": docval["InviteMode"],
@@ -112,7 +115,7 @@ const importGuests = (allguests: []) => {
                     "tag2": docval["Tag2"],
                     "tag3": docval["Tag3"],
                     "keywords1":createKeyWords(docval["NameOnCard"]),
-                    "refCode":""
+                    "refCode":Buffer.from(`${guestId}`).toString('base64')
                 }
 
                 await admin.firestore().collection("guests").doc(guest.id).set(guest);

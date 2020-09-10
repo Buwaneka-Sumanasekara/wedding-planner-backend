@@ -35,7 +35,6 @@ const getAllFilters = () => {
             "descriptions": "Filter by Invite Mode",
             "isrequired": true,
             "multiSelect": false,
-            //"values": FILTERS.INVITE_MODE,
             "values":_.sortBy(FILTERS.INVITE_MODE,(o:any)=>{return o.id}),
             "depend_on":""
         }
@@ -47,7 +46,6 @@ const getAllFilters = () => {
             "descriptions": "Filter by Tag1",
             "isrequired": true,
             "multiSelect": false,
-           // "values": FILTERS.TAG1,
            "values":_.sortBy(FILTERS.TAG1,(o:any)=> {return o.name}),
             "depend_on":""
         }
@@ -59,7 +57,6 @@ const getAllFilters = () => {
             "descriptions": "Filter by Tag2",
             "isrequired": true,
             "multiSelect": false,
-            //"values": FILTERS.TAG2,
             "values":_.sortBy(FILTERS.TAG2,(o:any)=>{return o.name}),
             "depend_on":FILTER_KEYS.TAG1,
         }
@@ -71,12 +68,10 @@ const getAllFilters = () => {
             "descriptions": "Filter by Tag3",
             "isrequired": true,
             "multiSelect": false,
-           // "values": FILTERS.TAG3,
             "values":_.sortBy(FILTERS.TAG3,(o:any)=>{return o.name}),
             "depend_on":FILTER_KEYS.SIDE
         }
         result.push(filterObj_tag3);
-
         return result;
 
     } catch (error) {

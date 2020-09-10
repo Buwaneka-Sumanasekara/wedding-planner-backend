@@ -11,7 +11,8 @@
         { "fieldPath": "tag2", "order": "ASCENDING" },
         { "fieldPath": "tag3", "order": "ASCENDING" },
         { "fieldPath": "side", "order": "ASCENDING" },
-        { "fieldPath": "keywords1", "order": "ASCENDING" }
+        { "fieldPath": "keywords1", "order": "ASCENDING" },
+        { "fieldPath": "tableNo", "order": "ASCENDING" }
       ]
     },
     { 
@@ -25,7 +26,8 @@
         { "fieldPath": "tag2", "order": "ASCENDING" },
         { "fieldPath": "tag3", "order": "ASCENDING" },
         { "fieldPath": "side", "order": "ASCENDING" },
-        { "fieldPath": "keywords1", "order": "ASCENDING" }
+        { "fieldPath": "keywords1", "order": "ASCENDING" },
+        { "fieldPath": "tableNo", "order": "ASCENDING" }
       ]
     }
 
