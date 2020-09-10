@@ -97,9 +97,11 @@ const createKeyWords = (name:string) => {
 
 const importGuests = (allguests: []) => {
     try {
-        allguests.forEach((docval: any, i: number) => {
+
+        let i=1;
+        for(const docval of allguests) {
             if (docval !== "") {
-                const id = (i + 1);
+                const id =i;
                 const guestId=`${docval["Side"]}${id}`;
                 const guest: GuestModel = {
                     "id": guestId,
@@ -120,14 +122,14 @@ const importGuests = (allguests: []) => {
                 }
 
                 return admin.firestore().collection("guests").doc(guest.id).set(guest).then(v=>{
+                    i++;
                     return true;
                 }).catch(e=>{
                     throw e;
                 });
             }
-            return docval;
-        });
-        return `Saved  ${allguests.length} records`;
+        }
+        return `Saved  ${i} of ${allguests.length} records`;
     } catch (error) {
         throw error;
     }
