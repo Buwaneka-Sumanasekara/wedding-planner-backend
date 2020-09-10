@@ -91,6 +91,7 @@ const acceptedDeclineInvitation = async (invitation: Invitation) => {
         const largerArray = snapshot.get('log');
         largerArray.push({"isAccepted":invitation.accepted,"crdate":timestamp});
         transaction.update(ref, 'log', largerArray);
+        return invitation;
       }).finally(()=>{
         return invitation;
       });
