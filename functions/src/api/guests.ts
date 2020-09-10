@@ -37,12 +37,17 @@ GuestRouter.post("/",(req:Request,res:Response)=>{
 })
 .post("/import",(req:Request,res:Response)=>{
     try {
-        const message=GuestController.importGuests(req.body);
-        const response_obj:ResponseAPI={
-            "status":true,
-            "message":message
-        }
-        return res.status(200).send(response_obj); 
+       
+       return GuestController.importGuests(req.body).then(message=>{
+            const response_obj:ResponseAPI={
+                "status":true,
+                "message":message
+            }
+            return res.status(200).send(response_obj); 
+        }).catch(err=>{
+            return res.status(500).send(err.message);
+        })
+        
     } catch (error) {
         return res.status(500).send(error.message);
     }

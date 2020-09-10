@@ -84,6 +84,9 @@ const acceptedDeclineInvitation = async (invitation: Invitation) => {
   try {
 
     await admin.firestore().collection("invitations").doc(invitation.refCode).update({ "accepted": invitation.accepted})
+   
+    //return invitation;
+   
     const timestamp = admin.firestore.FieldValue.serverTimestamp();
     const ref=admin.firestore().collection("invitations").doc(`${invitation.refCode}`);
     return admin.firestore().runTransaction(transaction => {
