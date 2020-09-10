@@ -142,6 +142,7 @@ const updateGuest = async (guest:GuestUpdate) => {
     try {
         const guestRef=admin.firestore().collection("guests").doc(guest.id);
         await guestRef.update(guest);
+        return guest;
     } catch (error) {
         throw error;
     }

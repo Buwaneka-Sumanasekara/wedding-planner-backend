@@ -40,7 +40,7 @@ GuestRouter.post("/",(req:Request,res:Response)=>{
             const response_obj:ResponseAPI={
                 "status":true,
                 "message":"success",
-                "data":guest
+                "data":result
             }
             return res.status(200).send(response_obj); 
         }).catch(error=>{

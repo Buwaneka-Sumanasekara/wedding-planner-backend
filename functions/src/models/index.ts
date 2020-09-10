@@ -39,6 +39,7 @@ interface GuestUpdate{
     contact1?:string,
     constact2?:string,
     tableNo?:number,
+    attendedCount?:number
 }
 
 interface GuestFilter{
