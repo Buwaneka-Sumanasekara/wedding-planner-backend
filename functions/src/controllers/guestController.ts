@@ -97,7 +97,7 @@ const createKeyWords = (name:string) => {
 
 const importGuests = (allguests: []) => {
     try {
-        allguests.forEach(async (docval: any, i: number) => {
+        allguests.forEach((docval: any, i: number) => {
             if (docval !== "") {
                 const id = (i + 1);
                 const guestId=`${docval["Side"]}${id}`;
