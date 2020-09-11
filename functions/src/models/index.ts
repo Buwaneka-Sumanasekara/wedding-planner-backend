@@ -38,12 +38,13 @@ interface GuestUpdate{
     seats?:number,
     contact1?:string,
     contact2?:string,
-    tag1:string,
-    tag2:string,
-    tag3:string,
+    tag1?:string,
+    tag2?:string,
+    tag3?:string,
     tableNo?:number,
-    keywords1:Array<any>,
+    keywords1?:Array<any>,
     keywords2?:Array<any>,
+    attendedCount?:number
 }
 
 interface GuestFilter{
