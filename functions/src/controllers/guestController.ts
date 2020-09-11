@@ -105,8 +105,9 @@ const importGuests = async(allguests: []) => {
         let saved=0;
         allguests.forEach(async (docval: any, i: number) => {
             if (docval !== "") {
-                const id = (i + 1);
-                const guestId = `${docval["Side"]}${id}`;
+                //const id = (i + 1);
+                //const guestId = `${docval["Side"]}${id}`;
+                const guestId = `${docval["ID"]}`;
                 const guest: GuestModel = {
                     "id": guestId,
                     "name": docval["NameOnCard"],
@@ -115,7 +116,7 @@ const importGuests = async(allguests: []) => {
                     "side": docval["Side"],
                     "seats": docval["Seats"],
                     "contact1": docval["Contact1"],
-                    "constact2": docval["Contact2"],
+                    "contact2": docval["Contact2"],
                     "tableNo": (docval["TABEL"] === "" ? 0 : parseInt(docval["TABEL"])),
                     "tag1": docval["Tag1"],
                     "tag2": docval["Tag2"],
@@ -138,11 +139,36 @@ const importGuests = async(allguests: []) => {
     }
 };
 
-const updateGuest = async (guest:GuestUpdate) => {
+const updateGuest = async (allguests=[]) => {
     try {
-        const guestRef=admin.firestore().collection("guests").doc(guest.id);
-        await guestRef.update(guest);
-        return guest;
+        const batch = admin.firestore().batch();
+        let saved=0;
+        allguests.forEach(async (docval: any, i: number) => {
+            if (docval !== "") {
+                const guestId = `${docval["ID"]}`;
+                const guest: GuestUpdate = {
+                    "id": guestId,
+                    "name": docval["NameOnCard"],
+                    "nickName": docval["RefName"],
+                    "inviteMode": docval["InviteMode"],
+                    "side": docval["Side"],
+                    "seats": docval["Seats"],
+                    "contact1": docval["Contact1"],
+                    "contact2": docval["Contact2"],
+                    "tableNo": (docval["TABEL"] === "" ? 0 : parseInt(docval["TABEL"])),
+                    "tag1": docval["Tag1"],
+                    "tag2": docval["Tag2"],
+                    "tag3": docval["Tag3"],
+                    "keywords1": createKeyWords(docval["NameOnCard"]),
+                }
+                const guestRef=admin.firestore().collection("guests").doc(guestId);
+                await guestRef.update(guest);
+                saved++;
+            } 
+        });
+        await batch.commit();
+      
+       return `Updated  ${allguests.length} records, ${saved} saved`;
     } catch (error) {
         throw error;
     }

@@ -9,7 +9,7 @@
  */
 import { Router,Response,Request } from "express";
 import GuestController from "../controllers/guestController";
-import {GuestFilter,ResponseAPI,GuestUpdate} from "../models";
+import {GuestFilter,ResponseAPI} from "../models";
 
 
 const GuestRouter = Router();
@@ -22,24 +22,6 @@ GuestRouter.post("/",(req:Request,res:Response)=>{
                 "status":true,
                 "message":"success",
                 "resultCount":result.length,
-                "data":result
-            }
-            return res.status(200).send(response_obj); 
-        }).catch(error=>{
-            return res.status(500).send(error.message); 
-        })
-
-        
-    } catch (error) {
-        return res.status(500).send(error.message);
-    } 
-}).put("/",(req:Request,res:Response)=>{
-    try {
-        const guest:GuestUpdate=req.body;
-        return GuestController.updateGuest(guest).then(result=>{
-            const response_obj:ResponseAPI={
-                "status":true,
-                "message":"success",
                 "data":result
             }
             return res.status(200).send(response_obj); 
@@ -68,6 +50,22 @@ GuestRouter.post("/",(req:Request,res:Response)=>{
     } catch (error) {
         return res.status(500).send(error.message);
     }
+}).put("/import",(req:Request,res:Response)=>{
+    try {
+        return GuestController.updateGuest(req.body).then(message=>{
+            const response_obj:ResponseAPI={
+                "status":true,
+                "message":message
+            }
+            return res.status(200).send(response_obj); 
+        }).catch(error=>{
+            return res.status(500).send(error.message); 
+        })
+
+        
+    } catch (error) {
+        return res.status(500).send(error.message);
+    } 
 })
 GuestRouter.get("/:guestId",(req:Request,res:Response)=>{
     try {

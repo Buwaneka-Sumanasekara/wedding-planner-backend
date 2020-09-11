@@ -17,7 +17,7 @@ interface GuestModel{
     side:string,
     seats:number,
     contact1?:string,
-    constact2?:string,
+    contact2?:string,
     tag1:string,
     tag2:string,
     tag3:string,
@@ -37,9 +37,13 @@ interface GuestUpdate{
     side?:string,
     seats?:number,
     contact1?:string,
-    constact2?:string,
+    contact2?:string,
+    tag1:string,
+    tag2:string,
+    tag3:string,
     tableNo?:number,
-    attendedCount?:number
+    keywords1:Array<any>,
+    keywords2?:Array<any>,
 }
 
 interface GuestFilter{
