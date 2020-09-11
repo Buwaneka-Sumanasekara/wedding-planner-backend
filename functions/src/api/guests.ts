@@ -33,8 +33,10 @@ GuestRouter.post("/",(req:Request,res:Response)=>{
     } catch (error) {
         return res.status(500).send(error.message);
     } 
-})
-.post("/import",(req:Request,res:Response)=>{
+});
+
+GuestRouter.route("/import")
+.post((req:Request,res:Response)=>{
     try {
        
        return GuestController.importGuests(req.body).then(message=>{
@@ -50,9 +52,9 @@ GuestRouter.post("/",(req:Request,res:Response)=>{
     } catch (error) {
         return res.status(500).send(error.message);
     }
-}).put("/import",(req:Request,res:Response)=>{
+}).put((req:Request,res:Response)=>{
     try {
-        return GuestController.updateGuest(req.body).then(message=>{
+        return GuestController.updateGuestsList(req.body).then(message=>{
             const response_obj:ResponseAPI={
                 "status":true,
                 "message":message
@@ -66,11 +68,32 @@ GuestRouter.post("/",(req:Request,res:Response)=>{
     } catch (error) {
         return res.status(500).send(error.message);
     } 
-})
-GuestRouter.get("/:guestId",(req:Request,res:Response)=>{
+});
+
+GuestRouter.route("/:guestId")
+.get((req:Request,res:Response)=>{
     try {
         const GuestId:string=req.params.guestId;
         return GuestController.getGuestById(GuestId).then(result=>{
+            const response_obj:ResponseAPI={
+                "status":true,
+                "message":"success",
+                "data":result
+            }
+            return res.status(200).send(response_obj); 
+        }).catch(error=>{
+            return res.status(500).send(error.message); 
+        })
+
+        
+    } catch (error) {
+        return res.status(500).send(error.message);
+    }
+    
+}).put((req:Request,res:Response)=>{
+    try {
+        const GuestId:string=req.params.guestId;
+        return GuestController.updateGuestById(GuestId,req.body).then(result=>{
             const response_obj:ResponseAPI={
                 "status":true,
                 "message":"success",

@@ -9,7 +9,7 @@
  */
 import * as admin from 'firebase-admin';
 import { GuestFilter, GuestModel,GuestUpdate} from "../models";
-
+import  Utills from "../utils";
 
 const getGuestById = async (GuestId: string) => {
     try {
@@ -28,6 +28,22 @@ const getGuestById = async (GuestId: string) => {
                 throw new Error("Guest not found");
             }
         }).catch(err => {
+            throw err;
+        })
+    } catch (error) {
+        throw error;
+    }
+}
+
+const updateGuestById = async (GuestId: string,guest:GuestUpdate) => {
+    try {
+        const guestId =GuestId;
+
+        const guestRef=admin.firestore().collection("guests").doc(guestId);
+        const updateGuest=Utills.removeUndefinedProps(guest);
+        return guestRef.update(updateGuest).then(res=>{
+            return updateGuest;
+        }).catch(err=>{
             throw err;
         })
     } catch (error) {
@@ -139,7 +155,7 @@ const importGuests = async(allguests: []) => {
     }
 };
 
-const updateGuest = async (allguests=[]) => {
+const updateGuestsList = async (allguests=[]) => {
     try {
         const batch = admin.firestore().batch();
         let saved=0;
@@ -162,7 +178,8 @@ const updateGuest = async (allguests=[]) => {
                     "keywords1": createKeyWords(docval["NameOnCard"]),
                 }
                 const guestRef=admin.firestore().collection("guests").doc(guestId);
-                await guestRef.update(guest);
+                const updateGuest=Utills.removeUndefinedProps(guest);
+                await guestRef.update(updateGuest);
                 saved++;
             } 
         });
@@ -179,5 +196,6 @@ export default {
     importGuests,
     getGuests,
     getGuestById,
-    updateGuest
+    updateGuestsList,
+    updateGuestById
 }
