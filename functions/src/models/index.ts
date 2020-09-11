@@ -26,7 +26,8 @@ interface GuestModel{
     keywords2?:Array<any>,
     refCode?:string,
     linkGenerated:boolean,
-    attendedCount:number
+    attendedCount:number,
+    invited:boolean
 }
 
 interface GuestUpdate{
@@ -44,7 +45,8 @@ interface GuestUpdate{
     tableNo?:number,
     keywords1?:Array<any>,
     keywords2?:Array<any>,
-    attendedCount?:number
+    attendedCount?:number,
+    invited?:boolean
 }
 
 interface GuestFilter{

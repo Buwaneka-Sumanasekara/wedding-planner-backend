@@ -140,7 +140,8 @@ const importGuests = async(allguests: []) => {
                     "keywords1": createKeyWords(docval["NameOnCard"]),
                     "refCode": Buffer.from(`${guestId}`).toString('base64'),
                     "linkGenerated":false,
-                    "attendedCount":0
+                    "attendedCount":0,
+                    "invited":false
                 }
                 const guestRef=admin.firestore().collection("guests").doc(guestId);
                 await guestRef.set(guest);
@@ -176,6 +177,7 @@ const updateGuestsList = async (allguests=[]) => {
                     "tag2": docval["Tag2"],
                     "tag3": docval["Tag3"],
                     "keywords1": createKeyWords(docval["NameOnCard"]),
+                    "invited":false
                 }
                 const guestRef=admin.firestore().collection("guests").doc(guestId);
                 const updateGuest=Utills.removeUndefinedProps(guest);

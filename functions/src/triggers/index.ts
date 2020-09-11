@@ -14,7 +14,7 @@ const onCreate_Invitation = functions.firestore
   .document('invitations/{id}')
   .onCreate((snap, context) => {
     const newValue = snap.data();
-    admin.firestore().collection("guests").doc(`${newValue.guestId}`).update({"refCode":newValue.refCode,"linkGenerated":true}).then(s => {
+    admin.firestore().collection("guests").doc(`${newValue.guestId}`).update({"refCode":newValue.refCode,"linkGenerated":true,"invited":true}).then(s => {
       console.log("test")
     }).catch(err => {
       console.log("errro")
@@ -25,7 +25,7 @@ const onCreate_Invitation = functions.firestore
   .document('invitations/{id}')
   .onDelete((snap, context) => {
     const newValue = snap.data();
-    admin.firestore().collection("guests").doc(`${newValue.guestId}`).update({"refCode":"","linkGenerated":false}).then(s => {
+    admin.firestore().collection("guests").doc(`${newValue.guestId}`).update({"refCode":"","linkGenerated":false,"invited":false}).then(s => {
       console.log("test")
     }).catch(err => {
       console.log("errro")
