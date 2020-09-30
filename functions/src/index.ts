@@ -32,3 +32,4 @@ exports.webApi = api.webApi;
 exports.onCreateInvitation = triggers.onCreate_Invitation;
 exports.onUpdateInvitation = triggers.onUpdate_Invitation;
 exports.onDeleteInvitation = triggers.onDelete_Invitation;
+exports.onUpdate_Guest = triggers.onUpdate_Guest;
