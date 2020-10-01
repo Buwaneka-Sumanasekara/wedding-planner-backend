@@ -26,12 +26,12 @@ const onCreate_Invitation = functions.firestore
 const onDelete_Invitation = functions.firestore
   .document('invitations/{id}')
   .onDelete((snap, context) => {
-    const newValue = snap.data();
-    admin.firestore().collection("guests").doc(`${newValue.guestId}`).update({ "refCode": "", "linkGenerated": false, "invited": false }).then(s => {
-      console.log("test")
-    }).catch(err => {
-      console.log("errro")
-    });
+   // const newValue = snap.data();
+    // admin.firestore().collection("guests").doc(`${newValue.guestId}`).update({ "refCode": "", "linkGenerated": false, "invited": false }).then(s => {
+    //   console.log("test")
+    // }).catch(err => {
+    //   console.log("errro")
+    // });
   });
 
 const onUpdate_Invitation = functions.firestore
